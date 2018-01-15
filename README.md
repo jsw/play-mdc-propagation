@@ -9,7 +9,7 @@ Currently, the `/` (which uses play-ws) is not correctly propagating the MDC.
 
 The '/sleep' route does work correctly. 
 
-Examplelogs from requesting http://localhost:9000 that demonstrates the failure
+Example logs from requesting http://localhost:9000 that demonstrates the failure
 ```
 2018-01-15 11:12:55,406 [info] [application-akka.actor.default-dispatcher-2] [] a.e.s.Slf4jLogger:89 Slf4jLogger started
 2018-01-15 11:12:55,646 [info] [play-dev-mode-akka.actor.default-dispatcher-8] [] p.a.Play:128 Application started (Dev)
