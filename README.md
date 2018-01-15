@@ -5,9 +5,9 @@ The solution I'm attempting is to override the `executionContext` in `MyApplicat
 logback is configured to include the MDC. The `HttpContextFilter` adds a requestId to the MDC. The `AccessLogFilter` is the last user code that runs on each request,
  and if everything works correctly, the requestId will be presented in its log statement.
  
-Currently, the `/` (which uses play-ws) is not correctly propagating the MDC.
+Currently, the `/` route (which uses play-ws) is not correctly propagating the MDC.
 
-The '/sleep' route does work correctly. 
+The `/sleep` route works correctly. 
 
 Example logs from requesting http://localhost:9000 that demonstrates the failure
 ```
