@@ -5,7 +5,7 @@ import play.api.libs.ws.ahc.AhcWSComponents
 import play.api.routing.Router
 import play.api.{ApplicationLoader, BuiltInComponentsFromContext, LoggerConfigurator}
 import router.Routes
-import util.{Client, MdcExecutionContext}
+import util.{Client, SttpClient}
 
 import scala.concurrent.ExecutionContext
 
@@ -23,9 +23,10 @@ class MyComponents(context: Context) extends BuiltInComponentsFromContext(contex
   with AccessLogComponents
   with AhcWSComponents {
 
-  override implicit lazy val executionContext: ExecutionContext = new MdcExecutionContext(actorSystem.dispatcher)
+  //override implicit lazy val executionContext: ExecutionContext = new MdcExecutionContext(actorSystem.dispatcher)
   lazy val client = new Client(wsClient)
-  lazy val homeController = new HomeController(controllerComponents, client)
+  lazy val sttpClient = new SttpClient()
+  lazy val homeController = new HomeController(controllerComponents, client, sttpClient)
   override lazy val router: Router = new Routes(httpErrorHandler, homeController)
   override lazy val httpFilters = Seq(accessLogFilter, httpContextFilter)
 }

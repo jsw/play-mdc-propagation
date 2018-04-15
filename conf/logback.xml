@@ -18,7 +18,9 @@
   <logger name="com.avaje.ebeaninternal.server.lib.BackgroundThread" level="OFF" />
   <logger name="com.gargoylesoftware.htmlunit.javascript" level="OFF" />
 
-  <root level="INFO">
+  <logger name="util.MdcUtil" level="INFO"/>
+
+  <root level="DEBUG">
     <appender-ref ref="STDOUT" />
   </root>
 

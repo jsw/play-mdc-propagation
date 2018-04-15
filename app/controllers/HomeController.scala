@@ -2,11 +2,11 @@ package controllers
 
 import com.typesafe.scalalogging.StrictLogging
 import play.api.mvc._
-import util.Client
+import util.{Client, SttpClient}
 
 import scala.concurrent.ExecutionContext
 
-class HomeController(cc: ControllerComponents, client: Client)(implicit ec: ExecutionContext) extends AbstractController(cc) with StrictLogging {
+class HomeController(cc: ControllerComponents, client: Client, sttpClient: SttpClient)(implicit ec: ExecutionContext) extends AbstractController(cc) with StrictLogging {
 
   def index() = Action.async {
     logger.info("HomeController.index")
@@ -16,6 +16,19 @@ class HomeController(cc: ControllerComponents, client: Client)(implicit ec: Exec
       s1 <- str1
       s2 <- str2
     } yield Ok(s"$s1 $s2")
+  }
+
+  def sttp() = Action.async {
+    logger.info("HomeController.index")
+    val str1 = sttpClient.get()
+    val str2 = sttpClient.get()
+    for {
+      s1 <- str1
+      s2 <- str2
+    } yield {
+      if (s1 != s2) logger.error(s"$s1 $s2")
+      Ok(s"$s1 $s2")
+    }
   }
 
   def sleep() = Action.async {
@@ -36,6 +49,5 @@ class HomeController(cc: ControllerComponents, client: Client)(implicit ec: Exec
       s1 <- str1
       s2 <- str2
     } yield Ok(s"$s1 $s2")
-
   }
 }

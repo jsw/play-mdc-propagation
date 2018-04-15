@@ -7,3 +7,4 @@
 GET     /                           controllers.HomeController.index
 GET     /sleep                      controllers.HomeController.sleep
 GET     /timer                      controllers.HomeController.timer
+GET     /sttp                       controllers.HomeController.sttp
